@@ -71,7 +71,6 @@ const productCtrl = {
         images,
         category,
       } = req.body;
-      console.log('crete', req.body);
 
       if (!images)
         return res
@@ -108,7 +107,6 @@ const productCtrl = {
   updateProducts: async (req, res) => {
     try {
       const { title, price, description, content, images, category } = req.body;
-      console.log('upd', req.body);
       if (!images)
         return res
           .status(400)
@@ -125,7 +123,7 @@ const productCtrl = {
           category,
         }
       );
-      console.log('tes', tes);
+
       res.json({ msg: 'Succes Update Product' });
     } catch (error) {
       return res.status(500).json({ msg: error.message });

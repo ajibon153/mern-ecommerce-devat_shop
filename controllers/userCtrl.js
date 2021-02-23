@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 const userCtrl = {
   register: async (req, res) => {
     try {
-      console.log('req.body', req.body);
       const { name, email, password } = req.body;
       const user = await Users.findOne({ email });
       if (user) return res.status(400).json({ msg: 'Email already exist.' });
@@ -31,6 +30,15 @@ const userCtrl = {
       res.json({ accessToken });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
+    }
+  },
+  loginGet: async (req, res) => {
+    try {
+      const user = await Users.find();
+      console.log('user', user);
+      res.json({ success: true, data: user });
+    } catch (error) {
+      console.log('error', error);
     }
   },
   login: async (req, res) => {
@@ -64,17 +72,26 @@ const userCtrl = {
   },
   refreshToken: async (req, res) => {
     try {
+      console.log('refresh token', req.cookies);
       const rf_token = req.cookies.refreshToken;
-      if (!rf_token)
+      console.log('refresh token', rf_token);
+      if (!rf_token) {
+        console.log('undef');
         return res.status(400).json({ msg: 'Please Login or Register' });
+      }
+        console.log('ada');
+
+
       jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
         if (err)
           return res.status(400).json({ msg: 'Please Login or Register' });
 
         const accessToken = createAccessToken({ id: user.id });
+        console.log('result', user, accessToken);
         res.json({ user, accessToken });
       });
     } catch (error) {
+      console.log('error', error);
       return res.status(500).json({ msg: error.message });
     }
   },

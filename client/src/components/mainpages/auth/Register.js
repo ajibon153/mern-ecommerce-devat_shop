@@ -14,12 +14,14 @@ export default function Register() {
     e.preventDefault();
     try {
       console.log('user', user);
-      let get = await axios.post('/user/register', { ...user });
+      let get = await axios.post('http://localhost:5000/user/register', {
+        ...user,
+      });
       console.log('get', get);
       localStorage.setItem('firstLogin', true);
-      // window.location.href = '/';
+      window.location.href = '/';
     } catch (error) {
-      alert(error);
+      alert(error.response.data.msg);
     }
   };
 
