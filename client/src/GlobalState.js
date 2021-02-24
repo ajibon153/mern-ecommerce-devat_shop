@@ -10,7 +10,7 @@ export const DataProvider = ({ children }) => {
     console.log('refresg call');
 
     const get = await axios.get('http://localhost:5000/user/refresh_token');
-    console.log('refresh', get);
+    console.log('refresh return', get);
   };
 
   useEffect(() => {
