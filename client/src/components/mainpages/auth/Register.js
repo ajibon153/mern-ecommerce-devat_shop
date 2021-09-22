@@ -12,16 +12,18 @@ export default function Register() {
 
   const loginSubmit = async (e) => {
     e.preventDefault();
-    try {
-      console.log('user', user);
-      let get = await axios.post('http://localhost:5000/user/register', {
-        ...user,
-      });
-      console.log('get', get);
-      localStorage.setItem('firstLogin', true);
-      window.location.href = '/';
-    } catch (error) {
-      alert(error.response.data.msg);
+    if (user.password.length < 8) {
+      alert('Password length too short, minimum 8 character');
+    } else {
+      try {
+        let get = await axios.post('http://localhost:5000/user/register', {
+          ...user,
+        });
+        localStorage.setItem('firstLogin', true);
+        window.location.href = '/';
+      } catch (error) {
+        alert(error.response.data.msg);
+      }
     }
   };
 

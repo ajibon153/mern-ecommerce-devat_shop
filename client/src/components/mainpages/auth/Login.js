@@ -13,13 +13,12 @@ export default function Login() {
   const loginSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log('user get', { ...user });
-      let get = await axios.post('http://localhost:5000/user/login', user);
-      console.log('get', get);
+      let get = await axios.post('http://localhost:5000/user/login', user, {
+        withCredentials: true,
+      });
       localStorage.setItem('firstLogin', true);
       window.location.href = '/';
     } catch (error) {
-      console.log('error', error.response.data);
       alert(error.response.data.msg);
     }
   };

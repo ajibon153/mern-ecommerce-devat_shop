@@ -2,7 +2,7 @@ const router = require('express').Router();
 const userCtrl = require('../controllers/userCtrl');
 const auth = require('../midleware/auth');
 
-router.get('/login', userCtrl.loginGet);
+router.get('/infor', userCtrl.loginGet);
 router.post('/login', userCtrl.login);
 router.get('/logout', userCtrl.logout);
 router.post('/register', userCtrl.register);

@@ -6,7 +6,8 @@ import Close from '../../assets/shopping-cart-solid.svg';
 import Cart from '../../assets/times-solid.svg';
 
 export default function Header() {
-  const value = useContext(GlobalState);
+  const state = useContext(GlobalState);
+  console.log('state', state);
   return (
     <header>
       <div className='menu'>
